@@ -1,4 +1,4 @@
-window.ARThreeOnLoad = function() {
+window.ARThreeOnLoad = function(mpath, vpath) {
 
 	ARController.getUserMediaThreeScene({maxARVideoSize: 320, cameraParam: 'Data/camera_para-iPhone 5 rear 640x480 1.0m.dat', 
 	onSuccess: function(arScene, arController, arCamera) {
@@ -47,8 +47,8 @@ window.ARThreeOnLoad = function() {
 
 		// model, dance, audio
 
-		var modelFile = 'https://rawgit.com/mrdoob/three.js/dev/examples/models/mmd/miku/miku_v2.pmd';
-		var vmdFiles = ['https://rawgit.com/mrdoob/three.js/dev/examples/models/mmd/vmds/wavefile_v2.vmd'];
+		var modelFile = mpath;
+		var vmdFiles = [vpath];
 		var audioFile = 'https://rawgit.com/mrdoob/three.js/dev/examples/models/mmd/audios/wavefile_short.mp3';
 		var audioParams = {delayTime: 160 * 1 / 30};
 
@@ -66,7 +66,7 @@ window.ARThreeOnLoad = function() {
 		var helper = new THREE.MMDHelper();
 
 		var loader = new THREE.MMDLoader();
-		loader.setTextureCrossOrigin('anonymous');
+		//loader.setTextureCrossOrigin('anonymous');
 
 		var ready = false;
 
@@ -77,6 +77,7 @@ window.ARThreeOnLoad = function() {
 			helper.add(mesh);
 			helper.setAnimation(mesh);
 			helper.setPhysics(mesh);
+
 			loader.loadAudio(audioFile, function (audio, listener) {
 				listener.position.z = 1;
 				helper.setAudio(audio, listener, audioParams);
@@ -118,6 +119,8 @@ window.ARThreeOnLoad = function() {
 
 };
 
-if (window.ARController && ARController.getUserMediaThreeScene) {
-	ARThreeOnLoad();
+var mmd4ar = function(modelpath, vmdpath){
+    if (	window.ARController && ARController.getUserMediaThreeScene) {
+        ARThreeOnLoad(modelpath, vmdpath);
+    }
 }

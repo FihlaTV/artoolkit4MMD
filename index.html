@@ -1,0 +1,26 @@
+<html>
+<head>
+<style>
+html,body {
+	margin: 5;
+	padding: 5;
+	width: 100%;
+	text-align: center;
+	overflow-x: hidden;
+}
+.portrait canvas {
+	transform-origin: 0 0;
+	transform: rotate(-90deg) translateX(-100%);
+}
+.desktop canvas {
+ 	transform: scale(-1, 1);
+}
+</style>
+</head>
+<body>
+<script src='./js/import.js'></script>
+<script>
+    mmd4ar('./models/serval/serval.pmx', './models/mmd/vmds/wavefile_v2.vmd');
+</script>
+</body>
+</html>
